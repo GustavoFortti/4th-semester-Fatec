@@ -10,7 +10,7 @@ CREATE TABLE Cliente(
     Cep VARCHAR(10) NOT NULL,
     UF VARCHAR(2)  NOT NULL,
     CONSTRAINT pk_Cod_cliente PRIMARY KEY (Cod_cliente)
-)
+);
 
 CREATE TABLE Item_pedido(
     -- FALTA CRIAR A PK 
@@ -19,7 +19,7 @@ CREATE TABLE Item_pedido(
     Quantidade INT(5) NOT NULL,
     CONSTRAINT fk_num_pedido FOREIGN KEY (Num_pedido) REFERENCES Pedido (Num_pedido),  
     CONSTRAINT fk_cod_produto FOREIGN KEY (Cod_produto) REFERENCES Produto (Cod_produto)  
-)
+);
 
 CREATE TABLE Produto(
     Cod_produto INT(5) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE Produto(
     Unidade VARCHAR(2) NOT NULL,
     Valor_unitario  DECIMAL(9,1) NOT NULL,
     CONSTRAINT pk_cod_produto PRIMARY KEY (Cod_produto)
-)
+);
 
 CREATE TABLE Pedido(
     cod_cliente INTEGER NOT NULL,
@@ -36,12 +36,73 @@ CREATE TABLE Pedido(
     Prazo_entrega DATE NOT NULL,
     CONSTRAINT fk_cod_cliente FOREIGN KEY (cod_cliente) REFERENCES Cliente (Cod_cliente),
     CONSTRAINT fk_cod_vendedor FOREIGN KEY (cod_vendedor) REFERENCES Vendedor (Cod_vendedor)
-)
+);
 
 CREATE TABLE Vendedor(
     Cod_vendedor INTEGER NOT NULL,
     Nome_vendedor VARCHAR(30),
     Faixa_comissao DECIMAL(6,2),
-    Faixa_comissao DECIMAL(9,2),
+    Salario_comissao DECIMAL(9,2),
     CONSTRAINT pk_cod_vendedor PRIMARY KEY (cod_vendedor)
-)
+);
+
+INSERT INTO Cliente ( Cod_cliente, Nome_cliente, Endereco, Cidade, Cep, UF)
+VALUES
+(1 , 'A1', 'E1', 'C1', 'CEP1', 'S1'),
+(2 , 'A2', 'E2', 'C2', 'CEP2', 'S2'),
+(3 , 'A3', 'E3', 'C3', 'CEP3', 'S3'),
+(4 , 'A4', 'E4', 'C4', 'CEP4', 'S4'),
+(5 , 'A5', 'E5', 'C5', 'CEP5', 'S5');
+
+INSERT INTO Item_pedido ( Num_pedido, Cod_produto, Quantidade)
+VALUES
+(1 , 1, 10),
+(2 , 2, 20),
+(3 , 3, 30),
+(4 , 4, 40),
+(5 , 5, 50);
+
+INSERT INTO Produto ( Cod_produto, Descricao, Unidade, Valor_unitario)
+VALUES
+(1 , 'A1', 'B1', 30.1),
+(2 , 'A2', 'B2', 30.2),
+(3 , 'A3', 'B3', 30.3),
+(4 , 'A4', 'B4', 30.4),
+(5 , 'A5', 'B5', 30.5);
+
+INSERT INTO Pedido ( cod_cliente, cod_vendedor, Num_pedido, Prazo_entrega)
+VALUES
+(1 , 1, 10, "31"), --"23 Mar 2022"
+(2 , 2, 20, "32"), --"23 Mar 2022"
+(3 , 3, 30, "33"), --"23 Mar 2022"
+(4 , 4, 40, "34"), --"23 Mar 2022"
+(5 , 5, 50, "35"); --"23 Mar 2022"
+
+INSERT INTO Vendedor ( Cod_vendedor, Nome_vendedor, Faixa_comissao, Salario_comissao)
+VALUES
+(1 , "AA1", 10, 100.1),
+(2 , "AA2", 20, 100.2),
+(3 , "AA3", 30, 100.3),
+(4 , "AA4", 40, 100.4),
+(5 , "AA5", 50, 100.5);
+
+ALTER TABLE Cliente ALTER COLUMN Endereco VARCHAR(30);
+
+ALTER TABLE Produto
+ADD Pco_Unit DECIMAL(6,2);
+
+UPDATE Cliente 
+SET Cep = '18035-400'
+WHERE Cidade = "Sorocaba";
+
+UPDATE Pedido
+SET Prazo_entrega = '10'
+WHERE cod_cliente = 20;
+
+UPDATE Produto
+SET Pco_Unit = Pco_Unit * 1.10
+WHERE Unidade = 'KG';
+
+DELETE FROM Produto
+WHERE Unidade = 'CX' AND Pco_Unit >= 50.00;
+
