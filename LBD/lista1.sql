@@ -42,7 +42,7 @@ CREATE TABLE Vendedor(
     Cod_vendedor INTEGER NOT NULL,
     Nome_vendedor VARCHAR(30),
     Faixa_comissao DECIMAL(6,2),
-    Salario_comissao DECIMAL(9,2),
+    Salario_fixo DECIMAL(9,2),
     CONSTRAINT pk_cod_vendedor PRIMARY KEY (cod_vendedor)
 );
 
@@ -72,13 +72,13 @@ VALUES
 
 INSERT INTO Pedido ( cod_cliente, cod_vendedor, Num_pedido, Prazo_entrega)
 VALUES
-(1 , 1, 10, "31"), --"23 Mar 2022"
-(2 , 2, 20, "32"), --"23 Mar 2022"
-(3 , 3, 30, "33"), --"23 Mar 2022"
-(4 , 4, 40, "34"), --"23 Mar 2022"
-(5 , 5, 50, "35"); --"23 Mar 2022"
+(1 , 1, 10, "30/01/1988"), --"23 Mar 2022"
+(2 , 2, 20, "30/02/1988"), --"23 Mar 2022"
+(3 , 3, 30, "30/03/2020"), --"23 Mar 2022"
+(4 , 4, 40, "30/04/2020"), --"23 Mar 2022"
+(5 , 5, 50, "30/05/2020"); --"23 Mar 2022"
 
-INSERT INTO Vendedor ( Cod_vendedor, Nome_vendedor, Faixa_comissao, Salario_comissao)
+INSERT INTO Vendedor ( Cod_vendedor, Nome_vendedor, Faixa_comissao, Salario_fixo)
 VALUES
 (1 , "AA1", 10, 100.1),
 (2 , "AA2", 20, 100.2),
@@ -106,3 +106,124 @@ WHERE Unidade = 'KG';
 DELETE FROM Produto
 WHERE Unidade = 'CX' AND Pco_Unit >= 50.00;
 
+SELECT Num_pedido, Prazo_entrega 
+FROM Pedido; 
+
+SELECT Descricao, Pco_Unit
+FROM Produto;
+
+SELECT Nome_cliente, Endereco
+FROM Cliente;
+
+SELECT Nome_vendedor
+FROM Vendedor;
+
+SELECT *
+FROM Cliente;
+
+SELECT *
+FROM Produto;
+
+SELECT Nome_vendedor AS Nome
+FROM Vendoder;
+
+SELECT (Valor_unitario * 1.10) AS Valor_unitario
+FROM Produto;
+
+SELECT (Salario_fixo * 1.10) AS Salario_fixo
+FROM Vendedor;
+
+SELECT Nome_cliente 
+FROM Cliente
+WHERE Cidade = 'Sorocaba';
+
+SELECT *
+FROM Vendedor 
+WHERE Salario_fixo < 400.00;
+
+SELECT Cod_produto, Descricao
+FROM Produto
+WHERE Unidade = 'KG';
+
+SELECT Item_pedido, Prazo_entrega
+FROM Pedido
+WHERE Prazo_entrega > '01/05/1998' AND Prazo_entrega < '01/06/1998';
+
+SELECT Item_pedido, Prazo_entrega
+FROM Pedido
+WHERE Prazo_entrega >= '01/01/2004' AND Prazo_entrega < '01/01/2005';
+
+SELECT * 
+FROM Produto
+WHERE Valor_unitario > 100.00 AND Valor_unitario < 200.00
+
+SELECT Num_pedido, Cod_produto
+FROM Item_pedido
+WHERE Quantidade > 1000 AND Quantidade < 1500;
+
+SELECT Nome_vendedor
+FROM Vendedor
+WHERE Nome_vendedor LIKE 'José%';
+
+SELECT Nome_vendedor
+FROM Vendedor
+WHERE Nome_vendedor LIKE '%Silva';
+
+SELECT Descricao, Cod_produto
+FROM Produto
+WHERE Descricao LIKE '%AC%';
+
+SELECT Nome_cliente 
+FROM Cliente
+WHERE Endereco = NULL;
+
+SELECT Cidade
+FROM Cliente
+GROUP BY Cidade;
+
+SELECT *
+FROM Cliente
+ORDER BY Nome_cliente;
+
+SELECT *
+FROM Cliente
+ORDER BY Cidade DESC;
+
+SELECT *
+FROM Cliente
+ORDER BY Cidade, Nome_cliente;
+
+SELECT Cod_produto, Descricao
+FROM Produto
+WHERE Unidade = 'KG'
+ORDER BY Descricao;
+
+SELECT MAX(Quantidade)
+FROM Item_pedido;
+
+SELECT MIN(Valor_unitario)
+FROM Produto;
+
+SELECT SUM(Salario_fixo)
+FROM Vendedor;
+
+SELECT COUNT(*) -- Unidade
+FROM Produto
+WHERE Unidade = 'Lt';
+
+SELECT Cidade ,COUNT(*) -- *
+FROM Cliente
+GROUP BY Cidade;
+
+SELECT COUNT(*)
+FROM Pedido
+GROUP BY Cod_vendedor;
+
+SELECT MAX(Valor_unitario), MIN(Valor_unitario)
+FROM Produto
+GROUP BY Unidade;
+
+SELECT COUNT(*)
+FROM Cliente
+WHERE COUNT(*) > 4
+GROUP BY Cidade;
