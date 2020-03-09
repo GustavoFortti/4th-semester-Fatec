@@ -30,10 +30,12 @@ CREATE TABLE Produto(
 );
 
 CREATE TABLE Pedido(
+    Num_pedido INT(5) NOT NULL,
     cod_cliente INTEGER NOT NULL,
     cod_vendedor INTEGER NOT NULL,
     Num_pedido INTEGER NOT NULL,
     Prazo_entrega DATE NOT NULL,
+    CONSTRAINT pk_Cod_pedido PRIMARY KEY (Num_pedido),
     CONSTRAINT fk_cod_cliente FOREIGN KEY (cod_cliente) REFERENCES Cliente (Cod_cliente),
     CONSTRAINT fk_cod_vendedor FOREIGN KEY (cod_vendedor) REFERENCES Vendedor (Cod_vendedor)
 );
@@ -227,3 +229,45 @@ SELECT COUNT(*)
 FROM Cliente
 WHERE COUNT(*) > 4
 GROUP BY Cidade;
+
+SELECT  p.Cod_vendedor, p.Nome_vendedor
+FROM Pedido AS p
+INNER JOIN Pedido AS P 
+ON P.fk_cod_vendedor = p.cod_vendedor
+WHERE Cod_cliente = 10;
+
+SELECT Num_pedido, Prazo_entrega, Quantidade, Descricao
+FROM Produto
+WHERE Cod_produto = 100;
+
+SELECT p.Cod_vendedor , v.Nome_vendedor
+FROM Pedido AS p
+INNER JOIN Vendedor AS v
+ON p.Cod_vendedor = v.fk_cod_vendedor
+INNER JOIN Cliente AS c
+ON p.fk_cod_cliente = c.cod_cliente
+WHERE Nome_cliente = 'José da Silva'
+
+SELECT i.Num_pedido, i.Cod_produto, pr.Descricao, pe.Cod_vendedor, c.Nome_cliente
+FROM Item_pedido AS i
+INNER JOIN Produto AS pr
+ON i.fk_cod_produto = pr.Cod_produto
+INNER JOIN Pedido AS pe
+ON i.fk_num_pedido = pe.Num_pedido
+INNER JOIN Cliente AS c
+ON pe.cod_cliente = c.cod_cliente
+WHERE c.Cidade = 'Sorocaba';
+
+SELECT i.Cod_produto, pr.Descricao, i.Quantidade, pe.Prazo_entrega
+FROM Item_pedido AS i
+INNER JOIN Produto AS pr
+ON i.Cod_produto = pr.Cod_produto
+INNER JOIN Pedido AS pe
+ON i.fk_num_pedido = pe.pk_Cod_pedido
+WHERE pe.Num_pedido = 123;
+
+SELECT c.Cod_cliente ,c.Nome_cliente
+FROM Pedido AS p
+INNER JOIN Cliente AS c
+ON p.cod_cliente = c.cod_cliente
+WHERE p.cod_vendedor = 10 AND c.Cidade = 'Sorocaba' OR c.Cidade = 'Itu';
