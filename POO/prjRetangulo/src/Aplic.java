@@ -8,8 +8,13 @@ import java.util.Scanner;
 public class Aplic {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
-        Retangulo objRet = new Retangulo();
+        //Retangulo objRet = new Retangulo();
         double medBase, medAlt;
+        
+        String unidade;
+        System.out.println("Digite a unidade: ");
+        unidade = entrada.next();
+        Retangulo objRet = new Retangulo(unidade);
         
         System.out.println("Digite a medida da altura: ");
         medAlt = entrada.nextDouble();
@@ -29,19 +34,14 @@ public class Aplic {
             
             choice = entrada.nextInt();
             
-            System.out.println("\n\n Medida da altura: " +
-                                objRet.getAltura());
-            System.out.println("\n\n Medida da Base: " +
-                                objRet.getBase());
+            System.out.println("\n\n Medida da altura: " + objRet.getAltura() + " " + objRet.getUnidadeMedida());
+            System.out.println("\n\n Medida da Base: " + objRet.getBase() + " " + objRet.getUnidadeMedida());
             switch(choice){
-                case 1 : System.out.println("Area: " +
-                                    objRet.calcArea());
+                case 1 : System.out.println("Area: " + objRet.calcArea() + " " + objRet.getUnidadeMedida() + "²");
                          break;
-                case 2 : System.out.println("Perimetro: " +
-                                    objRet.calcPerimetro());
+                case 2 : System.out.println("Perimetro: " + objRet.calcPerimetro() + " " + objRet.getUnidadeMedida());
                          break;
-                case 3 : System.out.println("Diagonal: " +
-                                    objRet.calcDiagonal());
+                case 3 : System.out.println("Diagonal: " + objRet.calcDiagonal() + " " + objRet.getUnidadeMedida());
                          break;
             }
         } while ( choice < 4);

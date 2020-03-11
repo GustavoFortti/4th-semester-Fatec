@@ -16,7 +16,7 @@ public class Aluno {
     private double NtTrab1;
     private double NtTrab2;
     
-    public void setRA(int r) {
+    public void setRa(int r) {
         RA = r;
     }
 
@@ -36,7 +36,7 @@ public class Aluno {
         NtTrab2 = t2;
     }
     
-    public int getRA() {
+    public int getRa() {
         return RA;
     }
     
@@ -57,14 +57,18 @@ public class Aluno {
     }
     
     public double CalcMediaProva() {
-        return ((NtPrv1 * 0.75) + (NtPrv2 * 0.35));
+        return (( 0.75 *(NtPrv1) + (2 * NtPrv2 ))/3);
     }
     
     public double CalcMediaTrab() {
-        return ((NtTrab1 * 0.25) + (NtTrab2 * 0.75));
+        return ((0.25 * (NtTrab1 + NtTrab2))/ 2);
     }
     
     public double CalcMediaFinal() {
-        return ((CalcMediaProva() * 0.50) + (CalcMediaTrab() * 0.50));
+        return (CalcMediaProva() + CalcMediaTrab());
+    }
+    
+    public boolean estaAprovado() {
+        return (CalcMediaFinal() >= 6);
     }
 }
