@@ -15,48 +15,58 @@ public class Aplic {
         System.out.println("Informe:\n");
         
         System.out.println("Codigo de matricula: ");
-        int mat = input.nextInt();
-        objAl.setMatricula(mat);
+        int RA = input.nextInt();
+        objAl.setRA(RA);
         
-        System.out.println("nome: ");
-        String nome = input.next();
-        objAl.setNome(nome);
+        System.out.println("Nota da prova 1: ");
+        double NtPrv1 = input.nextInt();
+        objAl.setNtPrv1(NtPrv1);
         
-        System.out.println("CPF: ");
-        int cod_al = input.nextInt();
-        objAl.setCpf(cod_al);
+        System.out.println("Nota da prova 2: ");
+        double NtPrv2 = input.nextInt();
+        objAl.setNtPrv2(NtPrv2);
         
-        System.out.println("nascimento: ");
-        String nascimento = input.next();
-        objAl.setNacimento(nascimento);
+        System.out.println("Nota da trabalho 1: ");
+        double NtTrab1 = input.nextInt();
+        objAl.setNtTrab1(NtTrab1);
         
-        System.out.println("RG: ");
-        int rg = input.nextInt();
-        objAl.setRg(rg);
+        System.out.println("Nota da trabalho 2: ");
+        double NtTrab2 = input.nextInt();
+        objAl.setNtTrab2(NtTrab2);
         
         int choice;
         do {
-            System.out.println("1 - Nome: ");
-            System.out.println("2 - Codigo de matricula: ");
-            System.out.println("3 - CPF: ");
-            System.out.println("4 - RG: ");
-            System.out.println("5 - nascimento: ");
-            System.out.println("6 - sair: ");
+            System.out.println("1 - RA: ");
+            System.out.println("2 - nota da prova 1: ");
+            System.out.println("3 - nota da prova 2: ");
+            System.out.println("4 - nota da trabalho 1: ");
+            System.out.println("5 - nota da trabalho 2: ");
+            System.out.println("6 - media das provas: ");
+            System.out.println("7 - media dos trabalhos: ");
+            System.out.println("8 - media final: ");
+            System.out.println("9 - sair: ");
             System.out.println("Informe: ");
             
             choice = input.nextInt();
             switch(choice){
-                case 1 : System.out.println("Nome " + objAl.getNome());
+                case 1 : System.out.println("RA " + objAl.getRA());
                         break;
-                case 2 : System.out.println("codigo da matricula " + objAl.getMatricula());
+                case 2 : System.out.println("nota da prova 1 " + objAl.getNtPrv1());
                         break;
-                case 3 : System.out.println("CPF " + objAl.getCpf());
+                case 3 : System.out.println("nota da prova 2 " + objAl.getNtPrv2());
                         break;
-                case 4 : System.out.println("RG " + objAl.getRg());
+                case 4 : System.out.println("nota da trabalho 1 " + objAl.getNtTrab1());
                         break;
-                case 5 : System.out.println("Nascimento " + objAl.getNacimento());
+                case 5 : System.out.println("nota da trabalho 2 " + objAl.getNtTrab2());
+                        break;
+                case 6 : System.out.println("Calcular a media das provas " + objAl.CalcMediaProva());
+                        break;
+                case 7 : System.out.println("Calcular a media dos trabalhos " + objAl.CalcMediaTrab());
+                        break;
+                case 8 : System.out.println("Calcular a media final " + objAl.CalcMediaFinal());
                         break;
             }
-        }while(choice < 6);
+        }while(choice < 9);
     }
 }
+

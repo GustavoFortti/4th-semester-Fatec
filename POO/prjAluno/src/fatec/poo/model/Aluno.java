@@ -10,41 +10,61 @@ package fatec.poo.model;
  * @author ds_magico
  */
 public class Aluno {
-    private int matricula;
-    private String nome;
-    private String nacimento;
-    private int rg;
-    private int cpf; 
+    private int RA;
+    private double NtPrv1;
+    private double NtPrv2;
+    private double NtTrab1;
+    private double NtTrab2;
     
-    public void setMatricula(int m) {
-        matricula = m;
+    public void setRA(int r) {
+        RA = r;
     }
-    public void setNome(String n) {
-        nome = n;
-    }
-    public void setNacimento(String na) {
-        nacimento = na;
-    }
-    public void setRg(int r) {
-        rg = r;
-    }
-    public void setCpf(int c) {
-        cpf = c;
+
+    public void setNtPrv1(double n1) {
+        NtPrv1 = n1;
+    }    
+    
+    public void setNtPrv2(double n2) {
+        NtPrv2 = n2;
+    }    
+    
+    public void setNtTrab1(double t1) {
+        NtTrab1 = t1;
     }
     
-    public int getMatricula() {
-        return matricula;
+    public void setNtTrab2(double t2) {
+        NtTrab2 = t2;
     }
-    public String getNome() {
-        return nome;
+    
+    public int getRA() {
+        return RA;
     }
-    public String getNacimento() {
-        return nacimento;
+    
+    public double getNtPrv1() {
+        return NtPrv1;
     }
-    public int getRg() {
-        return rg;
+
+    public double getNtPrv2() {
+        return NtPrv2;
     }
-    public int getCpf() {
-        return cpf;
+    
+    public double getNtTrab1() {
+        return NtTrab1;
+    }
+    
+    public double getNtTrab2() {
+        return NtTrab2;
+    }
+    
+    public double CalcMediaProva() {
+        return ((NtPrv1 * 0.75) + (NtPrv2 * 0.35));
+    }
+    
+    public double CalcMediaTrab() {
+        return ((NtTrab1 * 0.25) + (NtTrab2 * 0.75));
+    }
+    
+    public double CalcMediaFinal() {
+        return ((CalcMediaProva() * 0.50) + (CalcMediaTrab() * 0.50));
     }
 }
